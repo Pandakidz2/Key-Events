@@ -1,46 +1,26 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Main{
     public static void main(String args[]){
         Window frame = new Window(700, 700);
         
         frame.panelSetup();
-        frame.east.add(new Label("JP3 panel"));
-
-        Button button = new Button("Button!");
-        frame.top.add(button);
-
-        button.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e){
-                frame.events.setBackground(Color.RED);
-                frame.center.setBackground(Color.BLACK);
-                frame.east.setBackground(Color.BLUE);
-            }
-        });
-        
-        frame.add(frame.top, BorderLayout.PAGE_START);
-        frame.add(frame.events, BorderLayout.LINE_START);
-        frame.add(frame.center, BorderLayout.CENTER);
-        frame.add(frame.east, BorderLayout.LINE_END);
-
-        frame.setVisible(true);
+        frame.update();
     }
 
 }
 
 class Window extends JFrame{
-    // static final long serialVersionUID = asjdkasdlasdl12312390;
     JPanel top = new JPanel();
     EventPanel events = new EventPanel();
-    JPanel center = new JPanel();
-    JPanel east = new JPanel();
+    MemberPanel members = new MemberPanel();
+    InfoPanel info = new InfoPanel();
 
     public Window(int x, int y){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,13 +36,16 @@ class Window extends JFrame{
         // Event panel set up
         ArrayList<Event> eList = new ArrayList<>();
         String[] c = {"Josh", "Josh 2"};
-        eList.add(new Event("Test1", c));
-        eList.add(new Event("Test2", c));
-        events.initialize(eList);
-        
-        // Member panel set up
+        String[] d = {"Meilin", "Meilin 2"};
+        eList.add(new Event("Event 1", c));
+        eList.add(new Event("Event 2", d));
+        events.initialize(eList, this);
 
-        // Info panel set up
+        // Adding each panel
+        this.add(top, BorderLayout.PAGE_START);
+        this.add(events, BorderLayout.LINE_START);
+        this.add(members, BorderLayout.CENTER);
+        this.add(info, BorderLayout.LINE_END);
     }
 
     public void update(){
@@ -74,22 +57,71 @@ class Window extends JFrame{
 
 class EventPanel extends JPanel{
     
-    public void initialize(ArrayList<Event> list){
-
+    public void initialize(ArrayList<Event> list, Window frame){
+        this.setBackground(new Color(220, 220, 220));
         this.setLayout(new GridLayout(list.size(),1));
 
         for(Event n : list){
-            this.add(new Label(n.name));
+            Button b = new Button(n.name);
+            b.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e){
+                    MemberPanel.update(n, frame);
+                    System.out.println("Button " + n.name + " pressed");
+                    frame.update();
+                }
+            });
+
+            this.add(b);
         }
 
     }
+}
+
+class MemberPanel extends JPanel{
+    public MemberPanel(){
+        this.setBackground(new Color(250, 250, 250));
+        this.setLayout(new GridLayout(3, 1));
+    }
+
+    public static void update(Event e, Window frame){
+        
+        for(String m : e.chairs){
+            Button b = new Button(m);
+            b.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e){
+                    Member test = new Member("Joshua", "Lin");
+                    InfoPanel.update(test, frame);
+                    System.out.println("Button " + " pressed");
+                    frame.update();
+                }
+            });
+
+            frame.members.add(b);
+        }
+
+    }
+
+}
+
+class InfoPanel extends JPanel{
+    public InfoPanel(){
+        this.setBackground(new Color(220, 220, 220));
+        this.setLayout(new GridLayout(3, 1));
+    }
+
+    public static void update(Member m, Window frame){
+        frame.info.add(new Label(m.name));
+    }
+
 }
 
 class Event{
     String name;
     ArrayList<String> chairs = new ArrayList<>();
     String description;
-    ArrayList<member> memberList;
+    ArrayList<Member> memberList;
     
     public Event(String a, String[] b){
         this.name = a;
@@ -102,18 +134,12 @@ class Event{
 
 }
 
-class member{
-    String firstName;
-    String lastName;
-    int points;
+class Member{
+    String name;
+    int points = 0;
     boolean checkIn = false;
-}
-/*
-class memberPanel{
 
+    Member(String first, String last){
+        name = first + " " + last; 
+    }
 }
-
-class infoPanel{
-
-}
-*/
