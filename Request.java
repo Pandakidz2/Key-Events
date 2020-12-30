@@ -38,12 +38,13 @@ public class Request{
 
     // Request HTTP data from the Google Sheets API
     public static void pull(){
-        final String API_Key = "key=" + APIKey.getKey();
+        final String sheet_ID = Information.getSheetID();
+        final String API_Key = "key=" + Information.getAPIKey();
         final String Grid_Data = "includeGridData=" + "true";
 
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(
-            URI.create("https://sheets.googleapis.com/v4/spreadsheets/1L88aiK9tt3bM2OZzvztkVLktJeiBv1XYzeIjrTg6vPE?"+API_Key+"&" +Grid_Data))
+            URI.create("https://sheets.googleapis.com/v4/spreadsheets/" + sheet_ID + "?" + API_Key + "&" + Grid_Data ))
             .build();
 
         client
