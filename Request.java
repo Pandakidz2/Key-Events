@@ -38,7 +38,7 @@ public class Request{
 
     // Request HTTP data from the Google Sheets API
     public static void pull(){
-        final String API_Key = "key=" + "AIzaSyC3AAzbHKTV3G1Brywmak8uhbhYLaFN9AI";
+        final String API_Key = "key=" + APIKey.getKey();
         final String Grid_Data = "includeGridData=" + "true";
 
         var client = HttpClient.newHttpClient();
