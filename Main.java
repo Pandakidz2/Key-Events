@@ -1,5 +1,3 @@
-package src;
-
 public class Main{
     public static void main(String args[]){
         /*Window frame = new Window(700, 700);
@@ -9,8 +7,11 @@ public class Main{
         frame.update();
         */
         
-        Update.points();
-        Update.JSON();
+        Request.pull();
+        Member Lori = Request.member(2);
+
+        Lori.getMonths();
+
     }
 
 }

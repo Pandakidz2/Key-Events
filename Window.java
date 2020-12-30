@@ -1,10 +1,9 @@
-package src;
-
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/*
 public class Window extends JFrame{
     LabelPanel label = new LabelPanel();
     EventPanel events = new EventPanel();
@@ -132,3 +131,4 @@ class InfoPanel extends JPanel{
         } else return "Checked in: " + "No";
     }
 }
+*/
