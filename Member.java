@@ -9,13 +9,8 @@ public class Member{
     public String name(){
         return lastName + ", " + firstName;
     }
-    public void getMonths(){
-        for(int i=0; i<months.size(); i++){
-            System.out.println(months.get(i).getName());
-            months.get(i).getEvents();
-
-            System.out.println("\n\n");
-        }
+    public ArrayList<Month> getMonths(){
+        return months;
     }
 
     // Mutator Methods
@@ -46,10 +41,8 @@ class Month{
         return monthName;
     }
 
-    public void getEvents(){
-        for(int i=0; i<events.size(); i++){
-            System.out.println(events.get(i).getEvent());
-        }
+    public ArrayList<Event> getEvents(){
+        return events;
     }
 }
 
@@ -64,7 +57,7 @@ class Event{
 
     // Accessor methods
     public String getEvent(){
-        return getName() + " -- " + getPoints();
+        return getName() + " -- " + getPoints() + " points";
     }
     private String getName(){
         return name;

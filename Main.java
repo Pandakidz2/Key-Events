@@ -1,16 +1,16 @@
+import java.util.ArrayList;
+
 public class Main{
     public static void main(String args[]){
-        /*Window frame = new Window(700, 700);
-        
-        frame.panelSetup();
-        frame.setVisible(true);
-        frame.update();
-        */
+        Window frame = new Window(300,200);
         
         Request.pull();
-        Member Lori = Request.member(2);
-
-        Lori.getMonths();
+        ArrayList<Member> members = new ArrayList<Member>();
+        members.add(Request.member(2));
+        members.add(Request.member(3));
+        
+        frame.setUp(members);
+        frame.setVisible(true);
 
     }
 
