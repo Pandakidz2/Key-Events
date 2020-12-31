@@ -7,7 +7,7 @@ public class Main{
         Request.pull();
         ArrayList<Member> members = new ArrayList<Member>();
         
-        /* Processing and creating so many member objects takes time; Needless to say there's
+        /* Processing and creating so many member objects takes time, needless to say there's
         *  probably a faster way to do this; I'm looking into it.
         */
         for(int i=2; i<Request.getMaxRows()-1; i++){
