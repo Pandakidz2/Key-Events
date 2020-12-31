@@ -7,12 +7,14 @@ import javax.swing.JComboBox;
 import java.awt.event.*;
 
 public class Window extends JFrame{
+    private static final long serialVersionUID = 6856031828783739192L;
+    
     private JTabbedPane tabbedpane = new JTabbedPane();
 
     public Window(int x, int y){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setTitle("Points");
+        this.setTitle("Dulaney Key Club Points");
         this.setSize(new Dimension(x,y));
         this.setResizable(false);
 
@@ -48,9 +50,11 @@ public class Window extends JFrame{
 }
 
 class MemberTab extends JPanel{
+    private static final long serialVersionUID = -4249464756785891838L;
+    
     Window window;
     ArrayList<Member> list;
-    JComboBox dropdown;
+    JComboBox<String> dropdown;
     Button submit = new Button("Submit");
 
     public MemberTab(ArrayList<Member> members, Window window){
@@ -72,7 +76,7 @@ class MemberTab extends JPanel{
         }
         
         members = memberNames.toArray(members);
-        dropdown = new JComboBox(members);
+        dropdown = new JComboBox<String>(members);
         
         this.add(dropdown);
 
@@ -93,9 +97,11 @@ class MemberTab extends JPanel{
 }
 
 class MonthTab extends JPanel{
+    private static final long serialVersionUID = 6976710718414322188L;
+    
     Window window;
     ArrayList<Month> months;
-    JComboBox dropdown;
+    JComboBox<String> dropdown;
     Button submit = new Button("Submit");
 
     public MonthTab(Member m, Window window){
@@ -116,7 +122,7 @@ class MonthTab extends JPanel{
             convert.add(m.getName());
         }
         array = convert.toArray(array);
-        dropdown = new JComboBox(array);
+        dropdown = new JComboBox<String>(array);
         this.add(dropdown);
 
         // Setting up button
@@ -136,6 +142,8 @@ class MonthTab extends JPanel{
 }
 
 class EventTab extends JPanel{
+    private static final long serialVersionUID = 7185133448178686343L;
+    
     ArrayList<Event> events;
 
     public EventTab(Month mon){

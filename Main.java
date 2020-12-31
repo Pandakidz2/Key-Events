@@ -6,8 +6,13 @@ public class Main{
         
         Request.pull();
         ArrayList<Member> members = new ArrayList<Member>();
-        members.add(Request.member(2));
-        members.add(Request.member(3));
+        
+        /* Processing and creating so many member objects takes time; Needless to say there's
+        *  probably a faster way to do this; I'm looking into it.
+        */
+        for(int i=2; i<Request.getMaxRows()-1; i++){
+            members.add(Request.member(i));
+        }
         
         frame.setUp(members);
         frame.setVisible(true);
