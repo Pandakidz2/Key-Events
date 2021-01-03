@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.awt.*;
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 import java.awt.event.*;
 
 public class Window extends JFrame{
@@ -24,12 +27,20 @@ public class Window extends JFrame{
     }
 
     public void setUp(ArrayList<Member> list){
-        MemberTab mTab = new MemberTab(list, this);
-        addTab("Members", mTab, 0);
+        LoginTab lTab = new LoginTab(list, this);
+        addTab("Login", lTab, 0);
         
         this.add(tabbedpane);
     }
+    public void removeTab(int index){
+        try{
+            tabbedpane.remove(index);
+        } catch(Exception err){
 
+        } finally{
+            update();
+        }
+    }
     public void addTab(String title, JPanel p, int index){
         try{
             tabbedpane.setComponentAt(index, p);
@@ -47,6 +58,38 @@ public class Window extends JFrame{
         this.revalidate();
     }
 
+}
+class LoginTab extends JPanel{
+    private static final long serialVersionUID = -2292948729682249378L;
+
+    Window window;
+    String loginID = Information.getLogin();
+    ArrayList<Member> list;
+    JTextField input = new JTextField("Enter The Login ID Here");
+
+    public LoginTab(ArrayList<Member> members, Window window){
+        list = members;
+        this.window = window;
+
+        this.setBackground(new Color(150, 150, 150));
+        
+        setUp();
+    }
+
+    private void setUp(){
+        input.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e){
+                    if(input.getText().equals(loginID)){
+                        MemberTab m = new MemberTab(list, window);
+                        
+                        window.removeTab(0);
+                        window.addTab("Members", m, 0);
+                    }
+                }
+            });
+        this.add(input);
+    }
 }
 
 class MemberTab extends JPanel{
