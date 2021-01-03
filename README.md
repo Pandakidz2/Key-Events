@@ -6,5 +6,6 @@ If you would like to try out the program, please download the JAR FILE KeyEvents
 Source code can be located in the src folder.
 
 ## Tips:
+- You will be prompted to enter a login token upon opening the program. Please contact me to obtain it.
 - Make sure you have Java installed on your computer.
 - If the program fails to open, try the command "java -jar KeyEvents.jar" in your command prompt, in the directory the jar file is located in.
